@@ -43,7 +43,7 @@ export default function Navbar(){
               <a href="/" className="text-slate-300 hover:text-teal-400 transition-colors duration-200 font-medium">Home</a>
             </li>
             {dropdowns.map((dropdown) =>
-             <li key={dropdown.title}>
+              <li key={dropdown.title}>
               <button 
               onClick={() => toggleDropdown(dropdown.title)}
               className="flex items-center space-x-1 w-full px-5 py-2 md:p-0 text-slate-300 hover:text-teal-400 transition-colors duration-200 font-medium"
@@ -85,8 +85,8 @@ export default function Navbar(){
                 ))}
               </ul>
             )}
-             </li>
-             
+              </li>
+
             )}
           </ul>
 
