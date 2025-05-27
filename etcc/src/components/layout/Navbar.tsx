@@ -45,52 +45,55 @@ export default function Navbar() {
                 Home
               </a>
             </li>
-            {dropdowns.map((dropdown) =>
-             <li key={dropdown.title}>
-              <button 
-              onClick={() => toggleDropdown(dropdown.title)}
-              className="flex items-center space-x-1 w-full px-5 py-2 md:p-0 text-slate-300 hover:text-teal-400 transition-colors duration-200 font-medium"
+            {dropdowns.map((dropdown) => (
+              <li
+                key={dropdown.title}
+                className="relative"
+                onMouseEnter={() => setHoveredDropdown(dropdown.title)}
+                onMouseLeave={() => setHoveredDropdown(null)}
               >
-                <span>{dropdown.title}</span>
-                <ChevronDown size={16} />
-              </button>
-              {openDropdown === dropdown.title && (
-              <ul className="md:absolute md:mt-2 bg-white text-black shadow-lg rounded-lg py-2 w-full md:w-56 z-10">
-                {dropdown.items.map((item) => (
-                  <li
-                    key={item.name}
-                    className="relative"
-                    onMouseEnter={() => setHoveredItem(item.name)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                  >
-                    <a
-                      href={item.href}
-                      className="flex justify-between items-center px-4 py-2"
-                    >
-                      {item.name}
-                      {item.subItems && <ChevronRight size={16} />}
-                    </a>
-                    {item.subItems && hoveredItem === item.name && (
-                      <ul className="md:absolute top-0 left-full ml-1 bg-white shadow-lg rounded-lg py-2 w-48 z-20 md:block">
-                        {item.subItems.map((sub) => (
-                          <li key={sub.name}>
-                            <a
-                              href={sub.href}
-                              className="block px-4 py-2 hover:bg-blue-100"
-                            >
-                              {sub.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-             </li>
-             
-            )}
+                <button
+                  className="flex items-center space-x-1 px-5 py-2 text-slate-300 hover:text-teal-400 transition-colors duration-200 font-medium"
+                >
+                  <span>{dropdown.title}</span>
+                  <ChevronDown size={16} />
+                </button>
+                {hoveredDropdown === dropdown.title && (
+                  <ul className="absolute top-full left-0 mt-2 bg-white text-black shadow-xl rounded-lg py-2 w-56 z-20 animate-fade-in">
+                    {dropdown.items.map((item) => (
+                      <li
+                        key={item.name}
+                        className="relative"
+                        onMouseEnter={() => setHoveredItem(item.name)}
+                        onMouseLeave={() => setHoveredItem(null)}
+                      >
+                        <a
+                          href={item.href}
+                          className="flex justify-between items-center px-4 py-2 hover:bg-blue-100 transition-colors"
+                        >
+                          {item.name}
+                          {item.subItems && <ChevronRight size={16} />}
+                        </a>
+                        {item.subItems && hoveredItem === item.name && (
+                          <ul className="absolute top-0 left-full ml-1 bg-white shadow-xl rounded-lg py-2 w-48 z-30 animate-fade-in">
+                            {item.subItems.map((sub) => (
+                              <li key={sub.name}>
+                                <a
+                                  href={sub.href}
+                                  className="block px-4 py-2 hover:bg-blue-100 transition-colors"
+                                >
+                                  {sub.name}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
